@@ -1,8 +1,8 @@
 import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 
-export async function POST(request) {
-  console.log(request)
+export async function PUT(request) {
+  console.log(request.body)
   const { searchParams } = new URL(request.url);
   const filename = searchParams.get('filename');
 
@@ -19,16 +19,6 @@ export async function POST(request) {
   return NextResponse.json(blob);
 }
 
-export async function GET(request) {
-  console.log(request)
-
-  return NextResponse.json(
-    { error: "Method not allowed" },
-    {
-      status: 405
-    }
-  );
-}
 // The next lines are required for Pages API Routes only
 // export const config = {
 //   api: {
