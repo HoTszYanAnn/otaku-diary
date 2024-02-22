@@ -9,10 +9,22 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@fontsource/roboto": "^5.0.8",
+    "@mui/base": "^5.0.0-beta.36",
+    "@mui/icons-material": "^5.15.10",
+    "@mui/material": "^5.15.10",
+    "@mui/material-nextjs": "^5.15.9",
+    "@mui/styled-engine-sc": "^6.0.0-alpha.16",
+    "@vercel/blob": "^0.22.1",
     "@vercel/kv": "^1.0.1",
+    "axios": "^1.6.7",
+    "classnames": "^2.5.1",
     "next": "14.1.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sass": "^1.71.1"
   },
   "devDependencies": {
     "eslint": "^8",
