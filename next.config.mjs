@@ -2,7 +2,7 @@
 const nextConfig = {
   headers: () => [
     {
-      source: '/badge*',
+      source: '/badge',
       headers: [
         {
           key: 'Cache-Control',
