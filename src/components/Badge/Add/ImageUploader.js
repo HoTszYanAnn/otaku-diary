@@ -42,18 +42,20 @@ export default function ImageUploader({ onUploadFinish, image }) {
     }
   }
   return (
-    <StyledLabel>
-      <input name="file" ref={inputFileRef} type="file" required style={{ display: 'none' }} onChange={onUpload} />
-      {image && <StyledImg
-        src={image}
-        alt={'uploaded-image'}
-        loading="lazy"
-      />}
-      <AddPhotoAlternateOutlinedIcon color="primary" fontSize="large" style={{ height: 60, width: 60, margin: 'auto', marginTop: 55, display: 'block' }} />
-      <Typography align='center' color="primary" mt={2} paragraph>
-        バッジの画像を変更
-      </Typography>
-      {loading && <StyledLinearProgress />}
-    </StyledLabel>
+    <div>
+      <StyledLabel>
+        <input name="file" ref={inputFileRef} type="file" required style={{ display: 'none' }} onChange={onUpload} />
+        {image && <StyledImg
+          src={image}
+          alt={'uploaded-image'}
+          loading="lazy"
+        />}
+        <AddPhotoAlternateOutlinedIcon color="primary" fontSize="large" style={{ height: 60, width: 60, margin: 'auto', marginTop: 55, display: 'block' }} />
+        <Typography align='center' color="primary" mt={2} paragraph>
+          バッジの画像を変更
+        </Typography>
+        {loading && <StyledLinearProgress />}
+      </StyledLabel>
+    </div>
   );
 }

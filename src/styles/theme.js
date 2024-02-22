@@ -57,7 +57,8 @@ const theme = createTheme({
     MuiTypography: {
       styleOverrides: {
         root: {
-          fontWeight: 'bold'
+          fontWeight: 'bold',
+          color: "#707070"
         }
       }
     }
