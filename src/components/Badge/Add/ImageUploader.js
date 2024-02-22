@@ -4,10 +4,10 @@ import { useState, useRef } from 'react';
 import { StyledLabel, StyledLinearProgress, StyledImg } from './styled';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
 import { Typography } from '@mui/material';
+import Compressor from 'compressorjs';
 
-export default function ImageUploader() {
+export default function ImageUploader({ onUploadFinish, image }) {
   const inputFileRef = useRef(null);
-  const [image, setImage] = useState();
   const [loading, setLoading] = useState(false);
 
   const onUpload = async (event) => {
@@ -15,16 +15,31 @@ export default function ImageUploader() {
     setLoading(true)
     const file = inputFileRef.current.files[0];
     if (file?.type.includes('image')) {
-      const response = await axios.put(`/api/image?filename=${file.name}`, file, {
-        headers: { "content-type": file.type }
-      })
-      if (response.status === 200 && response?.data) {
-        setImage(response?.data?.url);
-      }
+      new Compressor(file, {
+        maxWidth: '300',
+        maxHeight: '300',
+        success: async (compressedResult) => {
+          // compressedResult has the compressed file.
+          // Use the compressed file to upload the images to your server.        
+          console.log(compressedResult)
+          const response = await axios.put(`/api/image?filename=${file.name}`, compressedResult, {
+            headers: { "content-type": compressedResult.type }
+          })
+          console.log(compressedResult)
+          if (response.status === 200 && response?.data) {
+            onUploadFinish(response?.data?.url);
+          }
+          setLoading(false)
+        },
+        error: (e) => {
+          console.log(e)
+          setLoading(false)
+        }
+      });
     } else {
+      setLoading(false)
       // handle error
     }
-    setLoading(false)
   }
   return (
     <StyledLabel>

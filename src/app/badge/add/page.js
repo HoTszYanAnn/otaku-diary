@@ -8,10 +8,16 @@ import { useState } from "react"
 
 const BadgeAddPage = () => {
   const [form, setForm] = useState({})
-
+  const onUploadImageFinish = (newImage) => {
+    setForm({
+      ...form,
+      image: newImage
+    })
+  }
+  console.log(form)
   return (
     <StyledMain>
-      <ImageUploader img={form.image} />
+      <ImageUploader image={form.image} onUploadFinish={onUploadImageFinish} />
       <Grid
         container
         direction="row"
