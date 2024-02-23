@@ -4,35 +4,39 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import { StyledSubHeaderBar } from '@/styles/header';
 import { IconButton, Typography } from '@mui/material';
-import GridViewOutlinedIcon from '@mui/icons-material/GridViewOutlined';
 import EditIcon from '@mui/icons-material/Edit';
-import { kv } from "@vercel/kv";
-
-
-
+import { usePathname, useRouter } from 'next/navigation';
+import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
 const SubHeaderBar = () => {
+  const router = useRouter()
+  const pathname = usePathname()
 
-  const onClick = async () => {
-    const response = await fetch(
-      `/api/collection/push`,
-      {
-        method: 'POST',
-      },
-    );
+  const ACTION_BUTTON = {
+    '/collection': {
+      icon: <EditIcon />,
+      func: () => router.push('/collection/edit')
+    },
+    '/collection/edit': {
+      icon: <RefreshOutlinedIcon />,
+      func: async () => {
+        // reset all value
+      }
+    }
   }
+  const button = ACTION_BUTTON?.[pathname]
 
   return (
     <StyledSubHeaderBar position="fixed" color="white">
       <Toolbar>
         <Typography color="primary" variant="h5" >
-          バッジコレ
+          コレクション
         </Typography>
         <Box sx={{ flexGrow: 1 }} />
-        <IconButton color="primary"
-          onClick={onClick}
+        {button && <IconButton color="primary"
+          onClick={button?.func}
         >
-          <EditIcon />
-        </IconButton>
+          {button?.icon}
+        </IconButton>}
       </Toolbar>
     </StyledSubHeaderBar>
   )

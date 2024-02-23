@@ -27,7 +27,26 @@ const HeaderBar = () => {
     '/collection/add': {
       text: '保存',
       icon: <DoneOutlinedIcon />,
-      func: () => addCollectionToBE()
+      func: async () => {
+        const res = await addCollectionToBE()
+        if (res?.ok) {
+          router.push('/collection')
+        } else {
+          alert(res?.message)
+        }
+      }
+    },
+    '/collection/edit': {
+      text: '保存',
+      icon: <DoneOutlinedIcon />,
+      func: async () => {
+        const res = await updateCollectionQuantityToBE()
+        if (res?.ok) {
+          router.push('/collection')
+        } else {
+          alert(res?.message)
+        }
+      }
     }
   }
 
@@ -42,14 +61,14 @@ const HeaderBar = () => {
           }} />
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
-        <Button
+        {button && <Button
           color="primary"
           variant="contained"
           startIcon={button.icon}
           onClick={button.func}
         >
           {button.text}
-        </Button>
+        </Button>}
       </Toolbar>
     </StyledHeaderBar>
   )

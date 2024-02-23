@@ -1,16 +1,17 @@
 import { Typography } from "@mui/material";
 import { StyledInputContainer, StyledInput } from "./styled";
 
-const Input = ({ fieldName }) => {
+const Input = ({ label, onChange, value }) => {
   return (
     <StyledInputContainer
+      textInput
       container
       direction="row"
       justifyContent="space-between"
       alignItems="center"
     >
-      <Typography>{fieldName}</Typography>
-      <StyledInput type="text" />
+      <Typography>{label}</Typography>
+      <StyledInput type="text" onChange={(e) => onChange(e.target.value)} value={value} placeholder="未設定" />
     </StyledInputContainer>
   )
 }

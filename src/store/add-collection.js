@@ -1,4 +1,6 @@
 import { COLLECTION_FORM_FIELD } from '@/components/Collection/Add/const';
+import axios from 'axios';
+import { isInteger } from 'lodash';
 import { createStore, createHook } from 'react-sweet-state';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -26,9 +28,30 @@ const Store = createStore({
         [COLLECTION_FORM_FIELD.IMAGE.key]: undefined,
       })
     },
-    addCollectionToBE: () => ({ getState }) => {
-      const form = getState()
+    addCollectionToBE: () => async ({ getState }) => {
+      try {
+        const form = getState()
+        console.log(form, !form?.[COLLECTION_FORM_FIELD.ID.key])
+        if (!form?.[COLLECTION_FORM_FIELD.ID.key]) throw Error('ID Undefined')
+        if (!form?.[COLLECTION_FORM_FIELD.NAME.key]) throw Error('NAME Undefined')
+        if (!form?.[COLLECTION_FORM_FIELD.QUANTITY.key]) throw Error('QUANTITY Undefined')
+        if (!form?.[COLLECTION_FORM_FIELD.IMAGE.key]) throw Error('IMAGE Undefined')
+        if (!isInteger(form?.[COLLECTION_FORM_FIELD.QUANTITY.key])) throw Error('QUANTITY Not INTEGER')
+
+        await axios.post('/api/collection/push', form)
+        return {
+          ok: true
+        }
+      } catch (e) {
+        return {
+          ok: false,
+          message: e
+        }
+      }
     },
+    updateCollectionQuantityToBE: () => async ({ }) => {
+
+    }
   },
   // optional, unique, mostly used for easy debugging
   name: 'add-collection-form',

@@ -34,11 +34,11 @@ export const StyledImg = styled('img')(({ theme }) => ({
   zIndex: 1,
 }));
 
-export const StyledInputContainer = styled(Grid)(({ theme }) => ({
+export const StyledInputContainer = styled(Grid)(({ theme, textInput, numberInput }) => ({
   backgroundColor: theme.palette.white.main,
   borderRadius: 10,
   margin: '20px 0',
-  padding: '0 20px',
+  padding: numberInput ? '0 10px 0 20px' : '0 20px',
   height: 56,
 }));
 

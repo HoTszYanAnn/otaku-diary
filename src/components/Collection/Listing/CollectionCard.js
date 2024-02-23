@@ -1,29 +1,21 @@
 import * as React from 'react';
-import ImageListItemBar from '@mui/material/ImageListItemBar';
-import IconButton from '@mui/material/IconButton';
-import ImageListItem from '@mui/material/ImageListItem';
-import InfoIcon from '@mui/icons-material/Info';
+import { StyledImageListItem, StyledImage, StyledBox } from './styled';
+import NumberInput from './Edit/NumberInput';
+import { useParams } from 'next/navigation';
 
 export default function CollectionCard({ item }) {
-
+  const params = useParams()
+  const isEdit = params?.slug?.[0] === 'edit'
   return (
-    <ImageListItem key={item.id}>
-      <img
-        src={`https://qwevqaggtpc6qyfi.public.blob.vercel-storage.com/${item.image}`}
-        alt={item.displayName}
+    <StyledImageListItem key={item.id}>
+      <StyledImage
+        src={item.image}
+        alt={item.name}
         loading="lazy"
       />
-      <ImageListItemBar
-        title={item.count}
-        actionIcon={
-          <IconButton
-            sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
-            aria-label={`info about ${item.displayName}`}
-          >
-            <InfoIcon />
-          </IconButton>
-        }
-      />
-    </ImageListItem>
+      <StyledBox>
+        {isEdit ? <NumberInput /> : (<>{item.quantity}</>)}
+      </StyledBox>
+    </StyledImageListItem>
   );
 }
