@@ -14,7 +14,7 @@ const SubHeaderBar = () => {
 
   const onClick = async () => {
     const response = await fetch(
-      `/api/badge/push`,
+      `/api/collection/push`,
       {
         method: 'POST',
       },

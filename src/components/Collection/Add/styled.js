@@ -47,6 +47,7 @@ export const StyledInput = styled('input')(({ theme, align, width }) => ({
   outline: 'unset',
   border: 'none',
   textAlign: align || 'right',
-  width: width || 'auto'
+  width: width || 'auto',
+  color: theme.palette.text.main
 }));
 

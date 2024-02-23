@@ -2,7 +2,7 @@
 const nextConfig = {
   headers: () => [
     {
-      source: '/badge',
+      source: '/collection',
       headers: [
         {
           key: 'Cache-Control',
@@ -11,6 +11,16 @@ const nextConfig = {
       ],
     },
   ],
+  async redirects() {
+    return [
+      // Basic redirect
+      {
+        source: '/',
+        destination: '/collection',
+        permanent: false,
+      },
+    ]
+  },
 };
 
 export default nextConfig;

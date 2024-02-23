@@ -1,16 +1,15 @@
 "use client"
 import { useEffect, useState } from 'react';
 import ImageList from '@mui/material/ImageList';
-import BadgeCard from './BadgeCard';
+import CollectionCard from './CollectionCard';
 import axios from "axios";
 
-export default function BadgeGridList() {
+export default function CollectionGridList() {
   const [badgeDataList, setBadgeDataList] = useState([])
   const fetchBadgeFullList = async () => {
-    const response = await axios.get(`/api/badge/list`);
+    const response = await axios.get(`/api/collection/list`);
     if (response?.status === 200 && response?.data) {
       setBadgeDataList(response?.data)
-
     }
     return
   }
@@ -20,7 +19,7 @@ export default function BadgeGridList() {
   return (
     <ImageList gap={8}>
       {badgeDataList.map((item) => (
-        <BadgeCard item={item} />
+        <CollectionCard item={item} />
       ))}
     </ImageList>
   );

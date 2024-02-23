@@ -7,13 +7,31 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import { StyledHeaderBar } from '@/styles/header';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
+import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
 import { useRouter } from 'next/navigation'
 
 import { usePathname } from 'next/navigation'
+import { useCollectionFormAction } from '@/store/add-collection';
+
 const HeaderBar = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const [, { addCollectionToBE }] = useCollectionFormAction()
 
+  const ACTION_BUTTON = {
+    '/collection': {
+      text: '追加',
+      icon: <AddIcon />,
+      func: () => router.push('/collection/add')
+    },
+    '/collection/add': {
+      text: '保存',
+      icon: <DoneOutlinedIcon />,
+      func: () => addCollectionToBE()
+    }
+  }
+
+  const button = ACTION_BUTTON?.[pathname]
   return (
     <StyledHeaderBar position="fixed" color="white">
       <Toolbar style={{ paddingLeft: 10 }}>
@@ -27,10 +45,10 @@ const HeaderBar = () => {
         <Button
           color="primary"
           variant="contained"
-          startIcon={<AddIcon />}
-          onClick={() => router.push('/badge/add')}
+          startIcon={button.icon}
+          onClick={button.func}
         >
-          Add
+          {button.text}
         </Button>
       </Toolbar>
     </StyledHeaderBar>

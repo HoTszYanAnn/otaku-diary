@@ -35,14 +35,22 @@ const theme = createTheme({
       dark: '#ffffff',
       contrastText: '#000',
     },
-    background: '#F8F8F8'
+    background: '#F8F8F8',
+    text: {
+      light: '#707070',
+      main: '#707070',
+      dark: '#707070',
+    },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           boxShadow: 'unset',
-          borderRadius: 20
+          borderRadius: 20,
+          "&:hover": {
+            boxShadow: 'unset',
+          }
         }
       }
     },

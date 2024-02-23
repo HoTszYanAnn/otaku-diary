@@ -4,7 +4,7 @@ import IconButton from '@mui/material/IconButton';
 import ImageListItem from '@mui/material/ImageListItem';
 import InfoIcon from '@mui/icons-material/Info';
 
-export default function BadgeCard({ item }) {
+export default function CollectionCard({ item }) {
 
   return (
     <ImageListItem key={item.id}>
