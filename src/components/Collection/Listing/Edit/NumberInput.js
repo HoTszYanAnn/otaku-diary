@@ -1,9 +1,9 @@
 import AddIcon from "@mui/icons-material/Add"
 import RemoveIcon from '@mui/icons-material/Remove';
-import IconButton from "@mui/material/IconButton"
-import { StyledInput, StyledInputContainer } from "../styled";
-import { Grid, Typography } from "@mui/material";
+import { StyledInput, StyledInputContainer, StyledIconButton } from "../styled";
+import { Button, Grid, Typography } from "@mui/material";
 import { useParams } from "next/navigation";
+import { toInteger } from "lodash";
 
 const NumberInput = ({ label, onChange, value = 0 }) => {
 
@@ -17,13 +17,13 @@ const NumberInput = ({ label, onChange, value = 0 }) => {
     >
       <Typography>{label}</Typography>
       <Grid container direction="row" style={{ width: 'unset' }}>
-        <IconButton color="primary" onClick={() => onChange(value - 1)}>
-          <RemoveIcon />
-        </IconButton>
-        <StyledInput type="number" min="0" align={'center'} width={44} value={value} onChange={(e) => onChange(e.target.value)} />
-        <IconButton color="primary" onClick={() => onChange(value + 1)}>
-          <AddIcon />
-        </IconButton>
+        <StyledIconButton color="white" variant="contained" onClick={() => onChange(value > 0 ? value - 1 : value)} >
+          <RemoveIcon fontSize="small" />
+        </StyledIconButton>
+        <StyledInput onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} type="number" min="0" align={'center'} width={44} value={value} onChange={(e) => onChange(toInteger(e?.target?.value) || value)} />
+        <StyledIconButton color="white" variant="contained" onClick={() => onChange(value + 1)}>
+          <AddIcon fontSize="small" />
+        </StyledIconButton>
       </Grid>
     </StyledInputContainer>
   )

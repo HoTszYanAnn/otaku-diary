@@ -12,12 +12,13 @@ import { useRouter } from 'next/navigation'
 
 import { usePathname } from 'next/navigation'
 import { useCollectionFormAction } from '@/store/add-collection';
+import { useCollectionListAction } from '@/store/collection-list';
 
 const HeaderBar = () => {
   const router = useRouter()
   const pathname = usePathname()
   const [, { addCollectionToBE }] = useCollectionFormAction()
-
+  const [, { updateCollectionQuantityToBE }] = useCollectionListAction()
   const ACTION_BUTTON = {
     '/collection': {
       text: '追加',
@@ -40,11 +41,14 @@ const HeaderBar = () => {
       text: '保存',
       icon: <DoneOutlinedIcon />,
       func: async () => {
-        const res = await updateCollectionQuantityToBE()
-        if (res?.ok) {
-          router.push('/collection')
+        if (window.confirm('really save')) {
+          const res = await updateCollectionQuantityToBE()
+          if (res?.ok) {
+            router.push('/collection')
+          } else {
+            alert(res?.message)
+          }
         } else {
-          alert(res?.message)
         }
       }
     }

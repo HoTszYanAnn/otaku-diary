@@ -49,9 +49,6 @@ const Store = createStore({
         }
       }
     },
-    updateCollectionQuantityToBE: () => async ({ }) => {
-
-    }
   },
   // optional, unique, mostly used for easy debugging
   name: 'add-collection-form',

@@ -21,13 +21,21 @@ export default function ImageUploader({ onUploadFinish, image }) {
         success: async (compressedResult) => {
           // compressedResult has the compressed file.
           // Use the compressed file to upload the images to your server.        
-          console.log(compressedResult)
-          const response = await axios.put(`/api/image?filename=${file.name}`, compressedResult, {
-            headers: { "content-type": compressedResult.type }
-          })
-          console.log(compressedResult)
-          if (response.status === 200 && response?.data) {
-            onUploadFinish(response?.data?.url);
+          const formData = new FormData();
+          formData.append('image', compressedResult)
+          const response = await axios.post(
+            // use imgbb free image host
+            `https://api.imgbb.com/1/upload?key=7e574468e5ad30ac87dd9625945872e9&name=${file.name}`,
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
+              }
+            }
+          )
+          console.log(response)
+          if (response.status === 200 && response?.data?.data?.display_url) {
+            onUploadFinish(response?.data?.data?.display_url);
           }
           setLoading(false)
         },

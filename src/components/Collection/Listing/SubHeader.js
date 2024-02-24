@@ -7,10 +7,11 @@ import { IconButton, Typography } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
 import { usePathname, useRouter } from 'next/navigation';
 import RefreshOutlinedIcon from '@mui/icons-material/RefreshOutlined';
+import { useCollectionListAction } from '@/store/collection-list';
 const SubHeaderBar = () => {
   const router = useRouter()
   const pathname = usePathname()
-
+  const [, { resetCollectionEditList }] = useCollectionListAction()
   const ACTION_BUTTON = {
     '/collection': {
       icon: <EditIcon />,
@@ -18,9 +19,7 @@ const SubHeaderBar = () => {
     },
     '/collection/edit': {
       icon: <RefreshOutlinedIcon />,
-      func: async () => {
-        // reset all value
-      }
+      func: () => resetCollectionEditList()
     }
   }
   const button = ACTION_BUTTON?.[pathname]
