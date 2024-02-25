@@ -7,8 +7,6 @@ import { StyledMain } from "@/components/Collection/Add/styled"
 import { useCollectionFormAction, useCollectionFormByField } from "@/store/add-collection"
 import { toInteger } from "lodash"
 import { useEffect } from "react"
-import { defaults } from 'react-sweet-state';
-defaults.devtools = true
 
 const ImageUploader = () => {
   const [image, { setFormValue }] = useCollectionFormByField(COLLECTION_FORM_FIELD.IMAGE.key)

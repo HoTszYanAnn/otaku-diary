@@ -4,8 +4,6 @@ import ImageList from '@mui/material/ImageList';
 import CollectionCard from './CollectionCard';
 import axios from "axios";
 import { useCollectionList } from '@/store/collection-list';
-import { defaults } from 'react-sweet-state';
-defaults.devtools = true
 
 export default function CollectionGridList() {
   const [list, { fetchCollectionFullListFromBE }] = useCollectionList()

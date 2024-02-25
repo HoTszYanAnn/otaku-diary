@@ -26,3 +26,4 @@ const CollectionList = () => {
 }
 
 export default CollectionList
+export const fetchCache = 'force-no-store'
