@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
+import { COLLECTION_KEY } from '../const';
 
 export async function GET() {
-  const list = await kv.lrange('ann-collection-list', 0, -1);
-
+  const list = await kv.lrange(COLLECTION_KEY, 0, -1);
   return NextResponse.json(
     list,
     {

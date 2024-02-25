@@ -1,15 +1,21 @@
-import ImageUploader from "@/components/Collection/Add/ImageUploader";
+"use client"
 import CollectionGridList from "@/components/Collection/Listing/CollectionGridList";
 import SubHeaderBar from "@/components/Collection/Listing/SubHeader";
 import { StyledMain } from "@/components/Collection/Listing/styled";
-import { kv } from "@vercel/kv";
+import { useCollectionListAction } from "@/store/collection-list";
+import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
 const CollectionList = () => {
-  // await kv.set('setExample', 'xx');
-
+  const [, { resetCollectionEditList }] = useCollectionListAction()
+  const params = useParams()
+  const isEdit = params?.slug?.[0] === 'edit'
   useEffect(() => {
-    //isEdit reset list value
-  }, [])
+    resetCollectionEditList()
+    return () => {
+      resetCollectionEditList()
+    }
+  }, [isEdit])
 
   return (
     <StyledMain>

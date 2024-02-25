@@ -1,11 +1,10 @@
-import { put } from '@vercel/blob';
 import { NextResponse } from 'next/server';
 import { kv } from '@vercel/kv';
+import { COLLECTION_KEY } from '../const';
 
 export async function POST(request) {
   const data = await request.json();
-  console.log(data)
-  await kv.lpush('ann-collection-list', data);
+  await kv.lpush(COLLECTION_KEY, JSON.stringify(data));
 
   return NextResponse.json(
     {},

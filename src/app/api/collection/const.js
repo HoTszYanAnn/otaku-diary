@@ -1,0 +1,1 @@
+export const COLLECTION_KEY = 'ann-collection-list-3'

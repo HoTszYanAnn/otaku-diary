@@ -8,7 +8,7 @@ const Store = createStore({
   // value of the store on initialisation
   initialState: {
     list: [],
-    editList: {}
+    editList: {},
   },
   actions: {
     fetchCollectionFullListFromBE: () => async ({ setState, getState }) => {
@@ -40,8 +40,40 @@ const Store = createStore({
       }
 
     },
-    updateCollectionQuantityToBE: () => async ({ }) => {
-
+    onDeleteItem: ({ id }) => ({ getState, setState }) => {
+      const draft = getState()
+      const editList = cloneDeep(getState()?.editList)
+      editList[id] = -1
+      setState({ ...draft, editList })
+    },
+    updateCollectionQuantityToBE: () => async ({ getState }) => {
+      try {
+        const editList = getState()?.editList
+        const list = getState()?.list
+        const batchUpdateList = Object.keys(editList)?.map((id) => {
+          const target = list.find(i => i.id === id)
+          const index = list.findIndex(i => i.id === id)
+          if (!target || index === -1) throw Error('Exception Error No target ID/index find')
+          target.index = index
+          if (editList[id] === -1) {
+            target.action = 'DELETE'
+          } else {
+            target.action = 'UPDATE_QUANTITY'
+            target.quantity = editList[id]
+          }
+          return target
+        })
+        const res = await axios.post(`/api/collection/batch-update`, { batchUpdateList });
+        if (res?.status === 200) {
+          return {
+            ok: true
+          }
+        } else {
+          throw Error(`API POST ERROR: ${res.message}`)
+        }
+      } catch (e) {
+        alert(e)
+      }
     },
     resetCollectionEditList: () => ({ setState }) => {
       setState({ editList: {} })

@@ -95,17 +95,33 @@ export const StyledChipBox = styled(Box)(({ theme }) => ({
   left: 0,
   bottom: 10,
   display: 'flex',
-  justifyContent: 'center'
+  justifyContent: 'center',
+  padding: '0 10px'
 }));
 
 export const StyledDeleteButton = styled(IconButton)(({ theme }) => ({
   position: 'absolute',
   top: -14,
   right: -14,
-  zIndex: 1,
+  zIndex: 2,
   backgroundColor: theme.palette.primary.main,
   '&:hover': {
     backgroundColor: theme.palette.primary.dark,
+  }
+}));
 
+export const StyledDeletedOverlay = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  left: 0,
+  top: 0,
+  width: '100%',
+  height: '100%',
+  zIndex: 1,
+  borderRadius: 10,
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  '.MuiSvgIcon-root': {
+    fontSize: 150
   }
 }));
