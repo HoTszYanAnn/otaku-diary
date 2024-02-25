@@ -1,3 +1,4 @@
+"use client"
 import * as React from 'react';
 import { StyledImageListItem, StyledImage, StyledOverlayBox, StyledDeletedOverlay, StyledDeleteButton, StyledContainerBox, StyledBadge, StyledChipBox } from './styled';
 import NumberInput from './Edit/NumberInput';

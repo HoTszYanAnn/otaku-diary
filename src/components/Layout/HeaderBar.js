@@ -58,11 +58,11 @@ const HeaderBar = () => {
   return (
     <StyledHeaderBar position="fixed" color="white">
       <Toolbar style={{ paddingLeft: 10 }}>
-        <IconButton color="primary">
-          <ChevronLeftIcon onClick={() => {
-            const path = pathname?.split('/')?.slice(0, -1)?.join('/') || '/'
-            router.push(path)
-          }} />
+        <IconButton color="primary" onClick={() => {
+          const path = pathname?.split('/')?.slice(0, -1)?.join('/') || '/'
+          router.push(path)
+        }} >
+          <ChevronLeftIcon />
         </IconButton>
         <Box sx={{ flexGrow: 1 }} />
         {button && <Button

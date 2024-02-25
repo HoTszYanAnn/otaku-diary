@@ -10,6 +10,15 @@ const nextConfig = {
         },
       ],
     },
+    {
+      source: '/api/collection/list',
+      headers: [
+        {
+          key: 'Cache-Control',
+          value: 'no-store',
+        },
+      ],
+    },
   ],
   async redirects() {
     return [

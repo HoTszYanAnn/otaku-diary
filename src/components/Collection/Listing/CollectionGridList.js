@@ -17,7 +17,7 @@ export default function CollectionGridList() {
   return (
     <ImageList gap={8}>
       {list.map((item) => (
-        <CollectionCard item={item} />
+        <CollectionCard item={item} key={item.id} />
       ))}
     </ImageList>
   );
