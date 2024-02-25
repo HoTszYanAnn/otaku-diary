@@ -13,7 +13,7 @@ const Store = createStore({
   actions: {
     fetchCollectionFullListFromBE: () => async ({ setState, getState }) => {
       const draft = getState()
-      const response = await axios.get(`/api/collection/list`);
+      const response = await axios.get(`/api/collection/list`, { headers: { 'Cache-Control': 'no-cache' } });
       if (response?.status === 200 && response?.data) {
         setState({
           ...draft,
