@@ -19,3 +19,14 @@ export const StyledButtonBox = styled(Box)(({ theme, active }) => ({
   } : {
   })
 }));
+
+export const StyledFixedRouteLoadingBox = styled(Box)(({ theme }) => ({
+  position: 'fixed',
+  width: '100%',
+  top: 0,
+  left: 0,
+  zIndex: 10000,
+  '.MuiLinearProgress-root': {
+    height: 2
+  }
+}))

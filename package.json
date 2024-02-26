@@ -28,6 +28,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-sweet-state": "^2.7.1",
+    "react-use": "^17.5.0",
     "sass": "^1.71.1",
     "uuid": "^9.0.1"
   },

@@ -1,5 +1,5 @@
 "use client";
-import * as React from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import AddIcon from '@mui/icons-material/Add';
@@ -13,10 +13,12 @@ import { useRouter } from 'next/navigation'
 import { usePathname } from 'next/navigation'
 import { useCollectionFormAction } from '@/store/add-collection';
 import { useCollectionListAction } from '@/store/collection-list';
+import { CircularProgress } from '@mui/material';
 
 const HeaderBar = () => {
   const router = useRouter()
   const pathname = usePathname()
+  const [isButtonLoading, setButtonLoading] = useState(false)
   const [, { addCollectionToBE }] = useCollectionFormAction()
   const [, { updateCollectionQuantityToBE }] = useCollectionListAction()
   const ACTION_BUTTON = {
@@ -29,12 +31,14 @@ const HeaderBar = () => {
       text: '保存',
       icon: <DoneOutlinedIcon />,
       func: async () => {
+        setButtonLoading(true)
         const res = await addCollectionToBE()
         if (res?.ok) {
           router.push('/collection')
         } else {
           alert(res?.message)
         }
+        setButtonLoading(false)
       }
     },
     '/collection/edit': {
@@ -42,12 +46,14 @@ const HeaderBar = () => {
       icon: <DoneOutlinedIcon />,
       func: async () => {
         if (window.confirm('really save')) {
+          setButtonLoading(true)
           const res = await updateCollectionQuantityToBE()
           if (res?.ok) {
             router.push('/collection')
           } else {
             alert(res?.message)
           }
+          setButtonLoading(false)
         } else {
         }
       }
@@ -70,11 +76,12 @@ const HeaderBar = () => {
           variant="contained"
           startIcon={button.icon}
           onClick={button.func}
+          disabled={isButtonLoading}
         >
-          {button.text}
+          {isButtonLoading ? <CircularProgress color="inherit" size={16} /> : button.text}
         </Button>}
       </Toolbar>
-    </StyledHeaderBar>
+    </StyledHeaderBar >
   )
 }
 
