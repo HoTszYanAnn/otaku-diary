@@ -16,11 +16,11 @@ const NumberInput = ({ label, onChange, value = 0 }) => {
       alignItems="center"
     >
       <Typography>{label}</Typography>
-      <Grid container direction="row" style={{ width: 'unset' }}>
+      <Grid container direction="row" style={{ width: 'unset' }} alignItems="center" justifyContent="center">
         <StyledIconButton color="white" variant="contained" onClick={() => onChange(value > 0 ? value - 1 : value)} >
           <RemoveIcon fontSize="small" />
         </StyledIconButton>
-        <StyledInput onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} type="number" min="0" align={'center'} width={44} value={value} onChange={(e) => onChange(toInteger(e?.target?.value) || value)} />
+        <StyledInput onKeyDown={(evt) => ["e", "E", "+", "-"].includes(evt.key) && evt.preventDefault()} type="number" min="0" align={'center'} width={30} value={value} onChange={(e) => onChange(toInteger(e?.target?.value) || value)} />
         <StyledIconButton color="white" variant="contained" onClick={() => onChange(value + 1)}>
           <AddIcon fontSize="small" />
         </StyledIconButton>

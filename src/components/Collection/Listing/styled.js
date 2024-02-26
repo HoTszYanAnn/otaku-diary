@@ -66,7 +66,8 @@ export const StyledInput = styled('input')(({ theme, align, width }) => ({
   outline: 'unset',
   border: 'none',
   textAlign: align || 'right',
-  width: 60,
+  width: 54,
+  padding: 8,
   color: theme.palette.white.main,
   backgroundColor: 'transparent'
 }));
@@ -74,6 +75,7 @@ export const StyledInput = styled('input')(({ theme, align, width }) => ({
 
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
   background: theme.palette.primary.main,
+  height: 36,
   '&:hover': {
     background: theme.palette.primary.dark,
   }
