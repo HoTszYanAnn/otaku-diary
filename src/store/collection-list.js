@@ -15,10 +15,10 @@ const Store = createStore({
       const draft = getState()
       const timestamp = Date.parse(new Date().toString())
       const response = await axios.get(`/api/collection/list?tid=${timestamp}`)
-      if (response?.status === 200 && response?.data) {
+      if (response?.status === 200 && response?.data?.list) {
         setState({
           ...draft,
-          list: response?.data
+          list: response?.data?.list
         })
       }
     },
