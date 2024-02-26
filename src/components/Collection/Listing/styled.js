@@ -11,8 +11,9 @@ export const StyledMain = styled('main')(({ theme }) => ({
 }));
 
 export const StyledBadge = styled(Badge)(({ theme, hidden }) => ({
-  height: '100%',
-  width: '100%',
+  position: 'relative',
+  display: 'block',
+  aspectRatio: '1/1',
   '.MuiBadge-badge': {
     display: hidden ? 'none' : 'flex',
     height: 36,
@@ -24,7 +25,6 @@ export const StyledBadge = styled(Badge)(({ theme, hidden }) => ({
 
 export const StyledImageListItem = styled(ImageListItem)(({ theme }) => ({
   padding: "20px 20px 0 0",
-  paddingBottom: 0,
   aspectRatio: '1/1',
   position: 'relative',
   overflow: 'hidden'
@@ -32,11 +32,7 @@ export const StyledImageListItem = styled(ImageListItem)(({ theme }) => ({
 
 export const StyledContainerBox = styled(Box)(({ theme }) => ({
   background: theme.palette.white.main,
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  height: 'calc(100% - 20px)',
-  width: '100%',
+  aspectRatio: '1/1',
   borderRadius: 10,
   overflow: 'hidden'
 }));
@@ -48,6 +44,7 @@ export const StyledOverlayBox = styled(Box)(({ isEdit }) => ({
   height: isEdit ? '100%' : '50%',
   backgroundImage: isEdit ? 'linear-gradient(180deg, #00000020, #00000030,#00000020)' : 'linear-gradient(180deg, transparent, #00000030)',
   width: '100%',
+  borderRadius: 10,
 }));
 
 export const StyledImage = styled('img')(({ isEdit }) => ({
