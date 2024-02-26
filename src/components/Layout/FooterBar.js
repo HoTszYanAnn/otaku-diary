@@ -2,7 +2,7 @@ import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import { Grid } from '@mui/material';
-import { StyledButtonBox } from './styled'
+import { StyledButtonBox, StyledButtonContainerBox } from './styled'
 import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 
 const FooterBar = () => {
@@ -10,9 +10,11 @@ const FooterBar = () => {
     <AppBar position="fixed" color="white" sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar>
         <Grid container justifyContent="space-around">
-          <StyledButtonBox color="inherit" active>
-            <WidgetsOutlinedIcon color='primary' />
-          </StyledButtonBox>
+          <StyledButtonContainerBox color="inherit" active>
+            <StyledButtonBox active>
+              <WidgetsOutlinedIcon color='primary' />
+            </StyledButtonBox>
+          </StyledButtonContainerBox>
         </Grid>
       </Toolbar>
     </AppBar>
