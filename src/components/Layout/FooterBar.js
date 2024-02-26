@@ -1,26 +1,19 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AddIcon from '@mui/icons-material/Add';
-import SearchIcon from '@mui/icons-material/Search';
-import MoreIcon from '@mui/icons-material/MoreVert';
+import { Grid } from '@mui/material';
+import { StyledButtonBox } from './styled'
+import WidgetsOutlinedIcon from '@mui/icons-material/WidgetsOutlined';
 
 const FooterBar = () => {
   return (
     <AppBar position="fixed" color="white" sx={{ top: 'auto', bottom: 0 }}>
       <Toolbar>
-        <IconButton color="inherit" aria-label="open drawer">
-          <MenuIcon />
-        </IconButton>
-        <IconButton color="inherit">
-          <SearchIcon />
-        </IconButton>
-        <IconButton color="inherit">
-          <MoreIcon />
-        </IconButton>
+        <Grid container justifyContent="space-around">
+          <StyledButtonBox color="inherit" active>
+            <WidgetsOutlinedIcon color='primary' />
+          </StyledButtonBox>
+        </Grid>
       </Toolbar>
     </AppBar>
   )

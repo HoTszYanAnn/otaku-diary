@@ -15,8 +15,8 @@ export const StyledBadge = styled(Badge)(({ theme, hidden }) => ({
   width: '100%',
   '.MuiBadge-badge': {
     display: hidden ? 'none' : 'flex',
-    aspectRatio: '1/1',
-    padding: 18,
+    height: 36,
+    width: 36,
     borderRadius: 100,
     fontSize: 16
   }
@@ -35,7 +35,7 @@ export const StyledContainerBox = styled(Box)(({ theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
-  height: '100%',
+  height: 'calc(100% - 20px)',
   width: '100%',
   borderRadius: 10,
   overflow: 'hidden'
