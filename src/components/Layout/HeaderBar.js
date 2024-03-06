@@ -14,6 +14,7 @@ import { usePathname } from 'next/navigation'
 import { useCollectionFormAction } from '@/store/add-collection';
 import { useCollectionListAction } from '@/store/collection-list';
 import { CircularProgress } from '@mui/material';
+import { usePopupAction } from '@/store/popup';
 
 const HeaderBar = () => {
   const router = useRouter()
@@ -21,6 +22,8 @@ const HeaderBar = () => {
   const [isButtonLoading, setButtonLoading] = useState(false)
   const [, { addCollectionToBE }] = useCollectionFormAction()
   const [, { updateCollectionQuantityToBE }] = useCollectionListAction()
+  const [, { triggerConfirmPopup }] = usePopupAction()
+
   const ACTION_BUTTON = {
     '/collection': {
       text: '追加',
@@ -36,7 +39,12 @@ const HeaderBar = () => {
         if (res?.ok) {
           router.push('/collection')
         } else {
-          alert(res?.message)
+          triggerConfirmPopup({
+            title: "エラー",
+            description: res?.message,
+            onConfirm: () => { },
+            onCancel: () => { },
+          })
         }
         setButtonLoading(false)
       }
@@ -45,17 +53,26 @@ const HeaderBar = () => {
       text: '保存',
       icon: <DoneOutlinedIcon />,
       func: async () => {
-        if (window.confirm('really save')) {
-          setButtonLoading(true)
-          const res = await updateCollectionQuantityToBE()
-          if (res?.ok) {
-            router.push('/collection')
-          } else {
-            alert(res?.message)
-          }
-          setButtonLoading(false)
-        } else {
-        }
+        triggerConfirmPopup({
+          title: "保存",
+          description: '変更を保存してもよろしいですか?',
+          onConfirm: async () => {
+            setButtonLoading(true)
+            const res = await updateCollectionQuantityToBE()
+            if (res?.ok) {
+              router.push('/collection')
+            } else {
+              triggerConfirmPopup({
+                title: "エラー",
+                description: res?.message,
+                onConfirm: () => { },
+                onCancel: () => { },
+              })
+            }
+            setButtonLoading(false)
+          },
+          onCancel: () => { },
+        })
       }
     }
   }

@@ -37,9 +37,7 @@ const Store = createStore({
         }
         setState({ ...draft, editList })
       } catch (e) {
-        alert(e)
       }
-
     },
     onDeleteItem: ({ id }) => ({ getState, setState }) => {
       const draft = getState()
@@ -73,7 +71,10 @@ const Store = createStore({
           throw Error(`API POST ERROR: ${res.message}`)
         }
       } catch (e) {
-        alert(e)
+        return {
+          ok: false,
+          message: e.message
+        }
       }
     },
     resetCollectionEditList: () => ({ setState }) => {

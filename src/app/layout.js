@@ -4,6 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme, { globalStyles } from "@/styles/theme";
 import Head from "next/head";
 import HeaderBar from "@/components/Layout/HeaderBar";
+import Popup from "@/components/Popup";
 
 export const metadata = {
   title: "Next.js",
@@ -29,6 +30,7 @@ export default function RootLayout({ children }) {
             <HeaderBar />
             {children}
             <FooterBar />
+            <Popup />
           </body>
         </ThemeProvider>
       </AppRouterCacheProvider>
