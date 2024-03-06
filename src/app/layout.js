@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
           <body>
             <HeaderBar />
             {children}
-            <FooterBar />
+            {/* <FooterBar /> */}
             <Popup />
           </body>
         </ThemeProvider>
